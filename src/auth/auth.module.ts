@@ -3,10 +3,14 @@ import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { ConfigModule } from '@nestjs/config';
 import { GoogleStrategy } from './utils/GoogleStrategy';
+import { UserModule } from 'src/prisma/user/user.module';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [ConfigModule.forRoot(), UserModule],
   controllers: [AuthController],
-  providers: [AuthService, GoogleStrategy],
+  providers: [
+    GoogleStrategy,
+    AuthService,
+  ],
 })
 export class AuthModule {}
