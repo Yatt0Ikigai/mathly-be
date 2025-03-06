@@ -5,7 +5,6 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import authConfig from './config/auth.config';
 import { PrismaModule } from './prisma/prisma.module';
-import { UserModule } from './prisma/user/user.module';
 
 @Module({
   controllers: [AppController],
