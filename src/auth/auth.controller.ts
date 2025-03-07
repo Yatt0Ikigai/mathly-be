@@ -17,7 +17,7 @@ export class AuthController {
   }
 
   @Get('status')
-  user(@Req() request: Request){
-    console.log(request.user)
+  user(@Req() request: Request) {
+    console.log(request.user);
   }
 }

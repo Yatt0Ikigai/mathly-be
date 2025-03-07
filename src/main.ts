@@ -6,7 +6,10 @@ import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const SESSION_SECRET = app.get(ConfigService).get('SESSION_SECRET');
+  const SESSION_SECRET = app.get(ConfigService).get<string>('SESSION_SECRET');
+  if (!SESSION_SECRET) {
+    throw new Error('Session Secret is undefined');
+  }
   app.setGlobalPrefix('api');
   app.use(
     session({
@@ -22,4 +25,7 @@ async function bootstrap() {
   app.use(passport.session());
   await app.listen(process.env.PORT ?? 8080);
 }
-bootstrap();
+
+bootstrap().catch((err) => {
+  console.error('Error starting the server', err);
+});

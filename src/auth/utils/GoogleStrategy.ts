@@ -19,15 +19,17 @@ export class GoogleStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(accessToken: string, refreshToken: string, profile: Profile) {
-    const email = profile.emails?.length
-      ? (profile.emails[0]?.value ?? profile.emails[0].value)
-      : 'b';
+    const { displayName, emails } = profile;
+
+    if (!emails || emails.length <= 0) {
+      throw new Error(`Couldn't obtain ${displayName} emails`);
+    }
 
     const user = await this.authService.validateUser({
-      displayName: profile.displayName,
-      email: email,
+      displayName: displayName,
+      email: emails[0].value,
     });
 
-    return user || null;
+    return user;
   }
 }

@@ -9,10 +9,6 @@ import { SessionSerializer } from './utils/Serializer';
 @Module({
   imports: [ConfigModule.forRoot(), UserModule],
   controllers: [AuthController],
-  providers: [
-    GoogleStrategy,
-    SessionSerializer,
-    AuthService,
-  ],
+  providers: [GoogleStrategy, SessionSerializer, AuthService],
 })
 export class AuthModule {}
